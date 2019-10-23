@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans:200,400,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'administration/main.css' %}">
+    <title>Sistema para la prevención del lavado de dinero</title>
+  </head>
+  <body>
+
+    <!-- MAIN CONTAINER -->
+    <div class="main-container">
+
+      <!-- LEFT SIDE -->
+      <div class="left-side">
+        <a href="{% url 'get_clients' %}">
+          <div class="item menu-alert">
+            <p>alertas</p>
+          </div>
+        </a>
+        <a href="consultas.html">
+          <div class="item menu-query">
+            <p>consultas</p>
+          </div>
+        </a>
+        <a href="importar.html">
+          <div class="item menu-import">
+            <p>importar</p>
+          </div>
+        </a>
+        <a href="reportes.html">
+          <div class="item menu-report">
+            <p>reportes</p>
+          </div>
+        </a>
+        <a href="{% url 'get_users' %}">
+          <div class="item menu-admin">
+            <p>admin</p>
+          </div>
+        </a>
+      </div>
+
+      <!-- RIGHT SIDE -->
+      <div class="right-side">
+        <div class="header">
+          <title>Clients</title>
+          <div class="help-and-profile-icons">
+              <a href="{% url 'logout' %}" class="logout">Logout</a>
+          </div>
+        </div>
+        <div class="work-area">
+          <p>Administración de usuarios</p>
+          TODOS LOS USUARIOS:
+          {% for user in users %}
+          <p>{{ user.id }} {{ user.name }} {{ user.last_name }} {{ user.email }}</p>
+          {% endfor %}
+          CREAR UN USUARIO:
+          <form method="POST">
+              {{ user_form.as_p }}
+              {% csrf_token %}
+              <button type="submit">Crear Usuario</button>
+          </form>
+          <div class="buttons-container">
+            <div class="buttons-one button-cancel">
+              <p>Cancelar</p>
+            </div>
+            <div class="buttons-one button-ok">
+              <p>Aceptar</p>
+            </div>
+          </div>
+        </div>
+        <div class="footer">
+          <p>Usuario:<strong>&nbsp;GabO</strong></p>
+          <p>Fecha y Hora:<strong>&nbsp;22/Oct/2019 03:49 AM</strong></p>
+        </div>
+      </div>
+
+    </div><!--MAIN-CONTAINER-END -->
+
+  </body>
+</html>
